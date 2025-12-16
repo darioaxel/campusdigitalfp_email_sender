@@ -1,9 +1,9 @@
 import pytest
-from campusvirtualfp_email_sender.mailer import send_email, SendResult
+from campusdigitalfp_email_sender.mailer import send_email, SendResult
 from unittest.mock import patch, MagicMock
 
 
-@patch("campusvirtualfp_email_sender.mailer.smtplib.SMTP_SSL")
+@patch("campusdigitalfp_email_sender.mailer.smtplib.SMTP_SSL")
 def test_send_email_ok(mock_smtp):
     mock_server = MagicMock()
     mock_smtp.return_value.__enter__.return_value = mock_server
@@ -18,7 +18,7 @@ def test_send_email_ok(mock_smtp):
     mock_server.send_message.assert_called_once()
 
 
-@patch("campusvirtualfp_email_sender.mailer.smtplib.SMTP_SSL")
+@patch("campusdigitalfp_email_sender.mailer.smtplib.SMTP_SSL")
 def test_send_email_auth_fail(mock_smtp):
     mock_smtp.return_value.__enter__.return_value.login.side_effect = Exception("Auth error")
     res = send_email(
